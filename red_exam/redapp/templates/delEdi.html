@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<style>
+    div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+</style>
+
+<body>
+    <div>
+        <h1>{{courses.name}}</h1>
+        <a href="/display">Dashboard</a>
+    </div>
+
+    <form action="/edit/{{courses.id}}" method="post">
+        <table>
+            {% csrf_token%}
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name" value="{{courses.name}}"></td>
+            </tr>
+            <tr>
+                <td>Insturctor</td>
+                <td><input type="text" name="insturctor"></td>
+            </tr>
+            <tr>
+                <td>Day of Week</td>
+                <td><input type="text" name="day"></td>
+            </tr>
+            <tr>
+                <td>Drop-in-price</td>
+                <td><input type="number" name="number" min="0" value="{{courses.number }}"></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><input type="text" name="desc" value="{{courses.desc}}"></td>
+            </tr>
+        </table>
+        <button><a href="/delete/{{courses.id}}">Delete</a></button>
+        <button><a href="/display">Cancel</a></button>
+        <input type="submit" value="Submit">
+    </form>
+    {% if messages %}
+    <ul style="color: red; list-style-type: none;">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+</body>
+
+</html>

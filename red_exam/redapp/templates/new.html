@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create new Course </title>
+</head>
+<style>
+    div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+</style>
+
+<body>
+    <div>
+        <h1>Create a Course</h1>
+        <a href="/display">Dashboard</a>
+    </div>
+
+    <form action="create_course" method="post">
+        <table>
+            {% csrf_token%}
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>Instructor</td>
+                <td><input type="text" name="instructor"></td>
+            </tr>
+            <tr>
+                <td>Day of Week</td>
+                <td><input type="text" name="day" value="Wednesday"></td>
+            </tr>
+            <tr>
+                <td>Drop-in-price</td>
+                <td><input type="number" min="0" name="number"></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><textarea type="text" name="desc"></textarea></td>
+            </tr>
+        </table>
+        <button><a href="/display">Cancel</a></button>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if messages %}
+    <ul style="color: red; list-style-type: none;">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>
